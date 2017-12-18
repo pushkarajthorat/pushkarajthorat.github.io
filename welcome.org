@@ -1,0 +1,10 @@
+hello world this is a org mode text
+* This is bullet 1
+* Bullet2
+  1. Number 1
+  2. 2
+  3. 3
+  some text seperating
+  - non number bullet
+  - other
+   
