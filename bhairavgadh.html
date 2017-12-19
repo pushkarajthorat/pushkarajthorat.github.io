@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2017-12-19 Tue 16:56 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="pushkaraj.thorat" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2017 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org9c4f08c">1. Bhairav Gad Trek</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org9c4f08c" class="outline-2">
+<h2 id="org9c4f08c"><span class="section-number-2">1</span> Bhairav Gad Trek</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+On the weekend of 15 and 16 December 2017 Bhairav Gadh fort (<a href="https://www.google.co.in/maps/place/Bhairavgad/@19.3179443,73.7142013,464m/data=!3m1!1e3!4m13!1m7!3m6!1s0x3bdd720a3ef72a5b:0x4641dacc75262661!2sHarishchandragad!3b1!8m2!3d19.3863889!4d73.7780556!3m4!1s0x3bdd6ec49e5b825f:0x5136d23277858332!8m2!3d19.318739!4d73.714162">https://www.google.co.in/maps/place/Bhairavgad/@19.3179443,73.7142013,464m/data=!3m1!1e3!4m13!1m7!3m6!1s0x3bdd720a3ef72a5b:0x4641dacc75262661!2sHarishchandragad!3b1!8m2!3d19.3863889!4d73.7780556!3m4!1s0x3bdd6ec49e5b825f:0x5136d23277858332!8m2!3d19.318739!4d73.714162</a>), near Harishchandra Gadh. There multiple Bhairav Gadh, this is the one is in Malshej Ghat, Ajanawale, Maharashtra 421401.
+</p>
+
+<p>
+Bhairav Gadh summit consist of a vertical black rock of around 250-300 feet high, based on small platue located at height of 2500 feet. By looking at the current state of the fort we think it was used as observation spot rather than actual fort by earlier rulers, there are very few remains present now, most of which are destroyed either by British or by nature. We started our trek from a hotel (<a href="https://www.google.co.in/maps/place/Harishchandragad/@19.3331003,73.6960896,224m/data=!3m1!1e3!4m5!3m4!1s0x3bdd720a3ef72a5b:0x4641dacc75262661!8m2!3d19.3863889!4d73.7780556">https://www.google.co.in/maps/place/Harishchandragad/@19.3331003,73.6960896,224m/data=!3m1!1e3!4m5!3m4!1s0x3bdd720a3ef72a5b:0x4641dacc75262661!8m2!3d19.3863889!4d73.7780556</a>) on Amhednagar-Kalyan Road, which is at North of the fort. At the base, we prepared our bag packs, torch, filled water bottles, wore full sleeves, full pants to avoid any unfortunate reptile insident and started the trek at mid night around at 1:30PM, 15th Dec. I see on wikimapia the path we took is plotted, this could be used for reference (<a href="http://wikimapia.org/#lang=en&amp;lat=19.327110&amp;lon=73.700227&amp;z=17&amp;m=b&amp;search=19.318847,%2073.714837">http://wikimapia.org/#lang=en&amp;lat=19.327110&amp;lon=73.700227&amp;z=17&amp;m=b&amp;search=19.318847, 73.714837</a>) for further trekkers.
+Complete trek was divided into two stages; First is hiking to the base of the the rock structure, which is itself is something near to ~2500feet (nearly same as sinhgadh fort). I was doing this trek after almost 5 years. This hiking was tough on me, due to numerous mistakes I did including the one in preparation phase, wrong choice of back pack, metal water bottles and un-necessary luggage. More over lack of fitness and being overweight made things worst. I exaustadly complted trek to the base camp by ~03:00AM. On the platue we slept in our sleeping bags till 06:30AM. The platue where we spent the night was very windy due to its geographical nature, as all the wind from vally was blocked due to the mountain range and only place it could go is by rising thru this platue, to north-east direction.
+We left for rock climbing at 0730 AM, which was pure technical climbing. Our group was fortunate to be led by Sagar Amrale and Manoj with other experience members like Mahesh, Sushant and Maltesh Kusalkar. Safe Climbing Initiative (SCI) link1 (<a href="https://www.youtube.com/channel/UC7qj-ik-VT7CzRS_3I7UvYA">https://www.youtube.com/channel/UC7qj-ik-VT7CzRS_3I7UvYA</a>) and link2 (<a href="http://trekshitiz.com/trekshitiz/discussionboard/safe-climbing-initiative-get-together_topic134.html">http://trekshitiz.com/trekshitiz/discussionboard/safe-climbing-initiative-get-together_topic134.html</a>) had already done their work on this path and replaced the boalting on the path. Our group was being led by Manoj under guidance of Sagar. Sushant, Maltesh and Mahesh being more experienced, were supporting. Below attached pics are enough to tell the difficulty level of the climb.
+We were at top of this black rock at around 1:30 PM. We being a mavala of Great King Shivaji Maharaj ericted bhagava (orange) flag on this Gadh.
+After observation and satisfaction fulfilled eyes, we started decent at 02:00 PM till the point from where we rappled down to the base.
+</p>
+
+<p>
+  This was my first experience of rappeling, and I was shaking due to adranli pump in my blood. Mahesh, Sagar and Manoj did applauding job on giving us this experience which no one will ever never forget.
+After getting down, we had a great night camping where we had chicken barbeque with rest dinner.
+These were few pics we clicked on the route.
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: pushkaraj.thorat</p>
+<p class="date">Created: 2017-12-19 Tue 16:56</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
