@@ -1,3 +1,53 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-01-23T17:32:52+05:30</updated><id>http://localhost:4000/</id><title type="html">toothless</title><subtitle>random make shift solutions to problems</subtitle><entry><title type="html">Non intrusive approach to debug the slowest step of script</title><link href="http://localhost:4000/programming/2018/01/23/non-intrusive-approach-to-debug-the-slowest-step-of-script.html" rel="alternate" type="text/html" title="Non intrusive approach to debug the slowest step of script" /><published>2018-01-23T00:00:00+05:30</published><updated>2018-01-23T00:00:00+05:30</updated><id>http://localhost:4000/programming/2018/01/23/non-intrusive-approach-to-debug-the-slowest-step-of-script</id><content type="html" xml:base="http://localhost:4000/programming/2018/01/23/non-intrusive-approach-to-debug-the-slowest-step-of-script.html">&lt;div id=&quot;outline-container-org32cf174&quot; class=&quot;outline-2&quot;&gt;
-&lt;h2 id=&quot;org32cf174&quot;&gt;there is something to write here&lt;/h2&gt;
-&lt;/div&gt;</content><author><name>pushkarajthorat</name></author><category term="script" /><category term="bash" /><category term="perl" /><category term="debugging" /><summary type="html">Of my script which of the steps are taking longer</summary></entry></feed>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-01-23T18:19:26+05:30</updated><id>http://localhost:4000/</id><title type="html">toothless</title><subtitle>random make shift solutions to problems</subtitle><entry><title type="html">script instrumentation without editing it to debug the slowest step of script</title><link href="http://localhost:4000/programming/2018/01/23/non-intrusive-approach-to-debug-the-slowest-step-of-script.html" rel="alternate" type="text/html" title="script instrumentation without editing it to debug the slowest step of script" /><published>2018-01-23T00:00:00+05:30</published><updated>2018-01-23T00:00:00+05:30</updated><id>http://localhost:4000/programming/2018/01/23/non-intrusive-approach-to-debug-the-slowest-step-of-script</id><content type="html" xml:base="http://localhost:4000/programming/2018/01/23/non-intrusive-approach-to-debug-the-slowest-step-of-script.html">&lt;p&gt;
+Few days back we had a issue where a script was getting timed out, from logs it was successful, it took 2 hours rather than 10 mins as what we thought would be enough time for it to complete. That script was pretty old and was created to work without proper logging, it just outputted log messages to &lt;code&gt;stdout&lt;/code&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+such as:
+&lt;/p&gt;
+&lt;pre class=&quot;example&quot;&gt;
+$ bash ManagementNodeBackup.sh 
+logging statement 1
+logging statement 2
+logging statement 3
+logging statement 4
+&lt;/pre&gt;
+
+&lt;p&gt;
+After we ran the script with the &lt;i&gt;decorated&lt;/i&gt; caused it to output:
+&lt;/p&gt;
+&lt;pre class=&quot;example&quot;&gt;
+time bash -x ManagementNodeBackup.sh 2&amp;gt;&amp;amp;1 | 
+while IFS='' read -r line || [[ -n &quot;$line&quot; ]]
+do
+    echo `date +%s` &quot; $line&quot;;
+done 2&amp;gt;&amp;amp;1 | tee backup.log
+&lt;/pre&gt;
+
+&lt;p&gt;
+like this:
+&lt;/p&gt;
+&lt;pre class=&quot;example&quot;&gt;
+$ time bash -x ManagementNodeBackup.sh 2&amp;gt;&amp;amp;1 | 
+&amp;gt; while IFS='' read -r line || [[ -n &quot;$line&quot; ]]
+&amp;gt; do
+&amp;gt;     echo `date +%s` &quot; $line&quot;;
+&amp;gt; done 2&amp;gt;&amp;amp;1 | tee backup.log
+1516711319  + echo 'logging statement 1'
+1516711319  logging statement 1
+1516711319  + sleep 2
+1516711321  + echo 'logging statement 2'
+1516711321  logging statement 2
+1516711321  + sleep 2
+1516711323  + echo 'logging statement 3'
+1516711323  logging statement 3
+1516711323  + sleep 2
+1516711325  + echo 'logging statement 4'
+1516711325  logging statement 4
+
+real    0m6.016s
+user    0m0.011s
+sys     0m0.028s
+
+
+&lt;/pre&gt;</content><author><name>pushkarajthorat</name></author><category term="script" /><category term="bash" /><category term="perl" /><category term="debugging" /><summary type="html">Of my script which of the steps are taking longer</summary></entry></feed>

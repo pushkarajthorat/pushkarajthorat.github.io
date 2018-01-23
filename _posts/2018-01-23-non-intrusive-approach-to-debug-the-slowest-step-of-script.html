@@ -7,12 +7,61 @@ tags:
 - debugging
 author: pushkarajthorat
 layout: post
-title: Non intrusive approach to debug the slowest step of script
+title: script instrumentation without editing it to debug the slowest step of script
 excerpt: Of my script which of the steps are taking longer
 categories: 
 - programming
 ---
+<p>
+Few days back we had a issue where a script was getting timed out, from logs it was successful, it took 2 hours rather than 10 mins as what we thought would be enough time for it to complete. That script was pretty old and was created to work without proper logging, it just outputted log messages to <code>stdout</code>.
+</p>
 
-<div id="outline-container-org32cf174" class="outline-2">
-<h2 id="org32cf174">there is something to write here</h2>
-</div>
+<p>
+such as:
+</p>
+<pre class="example">
+$ bash ManagementNodeBackup.sh 
+logging statement 1
+logging statement 2
+logging statement 3
+logging statement 4
+</pre>
+
+<p>
+After we ran the script with the <i>decorated</i> caused it to output:
+</p>
+<pre class="example">
+time bash -x ManagementNodeBackup.sh 2&gt;&amp;1 | 
+while IFS='' read -r line || [[ -n "$line" ]]
+do
+    echo `date +%s` " $line";
+done 2&gt;&amp;1 | tee backup.log
+</pre>
+
+<p>
+like this:
+</p>
+<pre class="example">
+$ time bash -x ManagementNodeBackup.sh 2&gt;&amp;1 | 
+&gt; while IFS='' read -r line || [[ -n "$line" ]]
+&gt; do
+&gt;     echo `date +%s` " $line";
+&gt; done 2&gt;&amp;1 | tee backup.log
+1516711319  + echo 'logging statement 1'
+1516711319  logging statement 1
+1516711319  + sleep 2
+1516711321  + echo 'logging statement 2'
+1516711321  logging statement 2
+1516711321  + sleep 2
+1516711323  + echo 'logging statement 3'
+1516711323  logging statement 3
+1516711323  + sleep 2
+1516711325  + echo 'logging statement 4'
+1516711325  logging statement 4
+
+real    0m6.016s
+user    0m0.011s
+sys     0m0.028s
+
+
+</pre>
