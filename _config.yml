@@ -29,7 +29,6 @@ theme: minima
 plugins:
   - jekyll-feed
 
-
 timezone: Asia/Kolkata
 
 # Exclude from processing.
