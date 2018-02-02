@@ -1,6 +1,6 @@
 ---
 layout: page
-title: About toothless
+title: About blog
 permalink: /about/
 ---
 

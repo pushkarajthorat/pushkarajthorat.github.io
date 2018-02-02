@@ -1,9 +1,26 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-01-23T18:19:26+05:30</updated><id>http://localhost:4000/</id><title type="html">toothless</title><subtitle>random make shift solutions to problems</subtitle><entry><title type="html">script instrumentation without editing it to debug the slowest step of script</title><link href="http://localhost:4000/programming/2018/01/23/non-intrusive-approach-to-debug-the-slowest-step-of-script.html" rel="alternate" type="text/html" title="script instrumentation without editing it to debug the slowest step of script" /><published>2018-01-23T00:00:00+05:30</published><updated>2018-01-23T00:00:00+05:30</updated><id>http://localhost:4000/programming/2018/01/23/non-intrusive-approach-to-debug-the-slowest-step-of-script</id><content type="html" xml:base="http://localhost:4000/programming/2018/01/23/non-intrusive-approach-to-debug-the-slowest-step-of-script.html">&lt;p&gt;
-Few days back we had a issue where a script was getting timed out, from logs it was successful, it took 2 hours rather than 10 mins as what we thought would be enough time for it to complete. That script was pretty old and was created to work without proper logging, it just outputted log messages to &lt;code&gt;stdout&lt;/code&gt;.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-02-02T14:50:26+05:30</updated><id>http://localhost:4000/</id><title type="html">pushkaraj</title><subtitle>random make shift solutions to problems</subtitle><entry><title type="html">Instrumentation of code without editing it to debug for the slowest part of script</title><link href="http://localhost:4000/programming/2018/01/23/non-intrusive-approach-to-debug-the-slowest-step-of-script.html" rel="alternate" type="text/html" title="Instrumentation of code without editing it to debug for the slowest part of script" /><published>2018-01-23T00:00:00+05:30</published><updated>2018-01-23T00:00:00+05:30</updated><id>http://localhost:4000/programming/2018/01/23/non-intrusive-approach-to-debug-the-slowest-step-of-script</id><content type="html" xml:base="http://localhost:4000/programming/2018/01/23/non-intrusive-approach-to-debug-the-slowest-step-of-script.html">&lt;p&gt;
+Few days back I had a issue where a script was getting timed out, from logs it was successful, it took 2 hours rather than 10 mins as what I thought would be enough time for it to complete. That script was pretty old and was created to work without proper logging, it just outputted log messages to &lt;code&gt;stdout&lt;/code&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
-such as:
+Lets say that the script under discussion is &lt;code&gt;ManagementNodeBackup.sh&lt;/code&gt;
+&lt;/p&gt;
+&lt;pre class=&quot;example&quot;&gt;
+#!/bin/bash
+echo &quot;logging statement 1&quot;
+sleep 2
+echo &quot;logging statement 2&quot;
+sleep 2
+echo &quot;logging statement 3&quot;
+sleep 2
+echo &quot;logging statement 4&quot;
+&lt;/pre&gt;
+&lt;p&gt;
+even though here I have wrote it as a bash script this method will work for any scripting language or a compiled binary file too.
+&lt;/p&gt;
+
+&lt;p&gt;
+Execution of the script may provide output like:
 &lt;/p&gt;
 &lt;pre class=&quot;example&quot;&gt;
 $ bash ManagementNodeBackup.sh 
@@ -14,7 +31,7 @@ logging statement 4
 &lt;/pre&gt;
 
 &lt;p&gt;
-After we ran the script with the &lt;i&gt;decorated&lt;/i&gt; caused it to output:
+After I ran the script with the &lt;b&gt;&lt;i&gt;decorated&lt;/i&gt;&lt;/b&gt; caused it to output:
 &lt;/p&gt;
 &lt;pre class=&quot;example&quot;&gt;
 time bash -x ManagementNodeBackup.sh 2&amp;gt;&amp;amp;1 | 
@@ -48,6 +65,30 @@ $ time bash -x ManagementNodeBackup.sh 2&amp;gt;&amp;amp;1 |
 real    0m6.016s
 user    0m0.011s
 sys     0m0.028s
+&lt;/pre&gt;
 
 
-&lt;/pre&gt;</content><author><name>pushkarajthorat</name></author><category term="script" /><category term="bash" /><category term="perl" /><category term="debugging" /><summary type="html">Of my script which of the steps are taking longer</summary></entry></feed>
+&lt;p&gt;
+&lt;span class=&quot;underline&quot;&gt;&lt;b&gt;Explanation&lt;/b&gt;&lt;/span&gt;:
+&lt;/p&gt;
+
+&lt;p&gt;
+Here I started by redirecting &lt;code&gt;stderr&lt;/code&gt; to &lt;code&gt;stdout&lt;/code&gt; in command execution like:
+&lt;code&gt;command 2&amp;gt;&amp;amp;1&lt;/code&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+Now for, every line which is outputted on &lt;code&gt;stdout&lt;/code&gt; we are going to read the line in a small bash program (i.e. while loop) and &lt;b&gt;prepend&lt;/b&gt; date to it and print, like:
+&lt;/p&gt;
+
+&lt;pre class=&quot;example&quot;&gt;
+command 2&amp;gt;&amp;amp;1 |
+while IFS='' read -r line || [[ -n &quot;$line&quot; ]]
+do
+    echo `date +%s` &quot; $line&quot;;
+done
+&lt;/pre&gt;
+
+&lt;p&gt;
+Other two qualifiers, which is - first command &lt;code&gt;time&lt;/code&gt; and last &lt;code&gt;| tee&lt;/code&gt; are to add information and capture the output into log file which can be shipped back from production environment for debugging.
+&lt;/p&gt;</content><author><name>pushkarajthorat</name></author><category term="debugging" /><category term="instrumention of code" /><category term="bash" /><category term="scripting" /><summary type="html">Of my script which of the steps are taking longer</summary></entry></feed>

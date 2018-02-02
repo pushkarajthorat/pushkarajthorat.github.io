@@ -1,23 +1,40 @@
 ---
 date: 2018-01-23
 tags: 
-- script
-- bash
-- perl
 - debugging
+- instrumention of code
+- bash
+- scripting
 author: pushkarajthorat
 layout: post
-title: script instrumentation without editing it to debug the slowest step of script
+title: Instrumentation of code without editing it to debug for the slowest part of script
 excerpt: Of my script which of the steps are taking longer
 categories: 
 - programming
 ---
 <p>
-Few days back we had a issue where a script was getting timed out, from logs it was successful, it took 2 hours rather than 10 mins as what we thought would be enough time for it to complete. That script was pretty old and was created to work without proper logging, it just outputted log messages to <code>stdout</code>.
+Few days back I had a issue where a script was getting timed out, from logs it was successful, it took 2 hours rather than 10 mins as what I thought would be enough time for it to complete. That script was pretty old and was created to work without proper logging, it just outputted log messages to <code>stdout</code>.
 </p>
 
 <p>
-such as:
+Lets say that the script under discussion is <code>ManagementNodeBackup.sh</code>
+</p>
+<pre class="example">
+#!/bin/bash
+echo "logging statement 1"
+sleep 2
+echo "logging statement 2"
+sleep 2
+echo "logging statement 3"
+sleep 2
+echo "logging statement 4"
+</pre>
+<p>
+even though here I have wrote it as a bash script this method will work for any scripting language or a compiled binary file too.
+</p>
+
+<p>
+Execution of the script may provide output like:
 </p>
 <pre class="example">
 $ bash ManagementNodeBackup.sh 
@@ -28,7 +45,7 @@ logging statement 4
 </pre>
 
 <p>
-After we ran the script with the <i>decorated</i> caused it to output:
+After I ran the script with the <b><i>decorated</i></b> caused it to output:
 </p>
 <pre class="example">
 time bash -x ManagementNodeBackup.sh 2&gt;&amp;1 | 
@@ -62,6 +79,30 @@ $ time bash -x ManagementNodeBackup.sh 2&gt;&amp;1 |
 real    0m6.016s
 user    0m0.011s
 sys     0m0.028s
-
-
 </pre>
+
+
+<p>
+<span class="underline"><b>Explanation</b></span>:
+</p>
+
+<p>
+Here I started by redirecting <code>stderr</code> to <code>stdout</code> in command execution like:
+<code>command 2&gt;&amp;1</code>
+</p>
+
+<p>
+Now for, every line which is outputted on <code>stdout</code> we are going to read the line in a small bash program (i.e. while loop) and <b>prepend</b> date to it and print, like:
+</p>
+
+<pre class="example">
+command 2&gt;&amp;1 |
+while IFS='' read -r line || [[ -n "$line" ]]
+do
+    echo `date +%s` " $line";
+done
+</pre>
+
+<p>
+Other two qualifiers, which is - first command <code>time</code> and last <code>| tee</code> are to add information and capture the output into log file which can be shipped back from production environment for debugging.
+</p>
